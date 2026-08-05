@@ -1,0 +1,6 @@
+# This repository is text only: markdown, JSON fixtures, stdlib Python.
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/

@@ -1,0 +1,257 @@
+{
+ "_meta": {
+  "source": "https://lmspiq.fda.gov.tw/api/public/codes/search/full/codeKind/Lic.Type",
+  "fetched": "2026-08-05",
+  "refetch": "curl -sS --fail 'https://lmspiq.fda.gov.tw/api/public/codes/search/full/codeKind/Lic.Type'",
+  "field_names": "**快照的欄位名經過改名**：API 回的每筆是 `value`（碼）／`text`（名稱），這裡存成 `code`／`lic_type`，因為原名在這個 repo 的上下文裡讀不出是什麼。照 docs/00 §B 的欄位名讀這個檔會 KeyError——那是這一行存在的理由。",
+  "entries": 61,
+  "scope_note": "碼表共 61 筆，其中藥品類（排除醫器／粧／色）31 筆。藥品許可證資料中實際出現過的字別只有 26 種——碼表是可能值，不是出現值，兩者不要互相引用。重跑：SELECT count(DISTINCT substring(permit_number from '^(.*?)字第')) FROM <許可證表>;",
+  "not_a_mirror": "這是測試樣本，不是資料鏡像。要完整資料請自己向食藥署取得。"
+ },
+ "codes": [
+  {
+   "code": "01",
+   "lic_type": "衛署藥製"
+  },
+  {
+   "code": "02",
+   "lic_type": "衛署藥輸"
+  },
+  {
+   "code": "03",
+   "lic_type": "衛署成製"
+  },
+  {
+   "code": "04",
+   "lic_type": "衛署中藥輸"
+  },
+  {
+   "code": "05",
+   "lic_type": "衛署醫器製"
+  },
+  {
+   "code": "06",
+   "lic_type": "衛署醫器輸"
+  },
+  {
+   "code": "09",
+   "lic_type": "衛署菌疫製"
+  },
+  {
+   "code": "10",
+   "lic_type": "衛署菌疫輸"
+  },
+  {
+   "code": "12",
+   "lic_type": "內衛藥製"
+  },
+  {
+   "code": "13",
+   "lic_type": "內衛藥輸"
+  },
+  {
+   "code": "14",
+   "lic_type": "內衛成製"
+  },
+  {
+   "code": "15",
+   "lic_type": "內衛菌疫製"
+  },
+  {
+   "code": "16",
+   "lic_type": "內衛菌疫輸"
+  },
+  {
+   "code": "18",
+   "lic_type": "署藥兼食製"
+  },
+  {
+   "code": "19",
+   "lic_type": "衛署成輸"
+  },
+  {
+   "code": "20",
+   "lic_type": "衛署罕藥輸"
+  },
+  {
+   "code": "21",
+   "lic_type": "衛署罕藥製"
+  },
+  {
+   "code": "22",
+   "lic_type": "衛署罕菌疫輸"
+  },
+  {
+   "code": "23",
+   "lic_type": "衛署罕菌疫製"
+  },
+  {
+   "code": "24",
+   "lic_type": "衛署罕醫器輸"
+  },
+  {
+   "code": "41",
+   "lic_type": "衛署藥陸輸"
+  },
+  {
+   "code": "42",
+   "lic_type": "衛署醫器陸輸"
+  },
+  {
+   "code": "43",
+   "lic_type": "衛署醫器製壹"
+  },
+  {
+   "code": "44",
+   "lic_type": "衛署醫器輸壹"
+  },
+  {
+   "code": "45",
+   "lic_type": "衛署醫器外製"
+  },
+  {
+   "code": "46",
+   "lic_type": "衛署醫器陸輸壹"
+  },
+  {
+   "code": "47",
+   "lic_type": "衛署醫器外製壹"
+  },
+  {
+   "code": "51",
+   "lic_type": "衛部藥製"
+  },
+  {
+   "code": "52",
+   "lic_type": "衛部藥輸"
+  },
+  {
+   "code": "53",
+   "lic_type": "衛部成製"
+  },
+  {
+   "code": "55",
+   "lic_type": "衛部醫器製"
+  },
+  {
+   "code": "56",
+   "lic_type": "衛部醫器輸"
+  },
+  {
+   "code": "59",
+   "lic_type": "衛部菌疫製"
+  },
+  {
+   "code": "60",
+   "lic_type": "衛部菌疫輸"
+  },
+  {
+   "code": "68",
+   "lic_type": "部藥兼食製"
+  },
+  {
+   "code": "69",
+   "lic_type": "衛部成輸"
+  },
+  {
+   "code": "70",
+   "lic_type": "衛部罕藥輸"
+  },
+  {
+   "code": "71",
+   "lic_type": "衛部罕藥製"
+  },
+  {
+   "code": "72",
+   "lic_type": "衛部罕菌疫輸"
+  },
+  {
+   "code": "73",
+   "lic_type": "衛部罕菌疫製"
+  },
+  {
+   "code": "74",
+   "lic_type": "衛部罕醫器輸"
+  },
+  {
+   "code": "75",
+   "lic_type": "衛部罕醫器製"
+  },
+  {
+   "code": "83",
+   "lic_type": "衛部醫器製壹登"
+  },
+  {
+   "code": "84",
+   "lic_type": "衛部醫器輸壹登"
+  },
+  {
+   "code": "86",
+   "lic_type": "衛部醫器陸輸壹登"
+  },
+  {
+   "code": "91",
+   "lic_type": "衛部藥陸輸"
+  },
+  {
+   "code": "92",
+   "lic_type": "衛部醫器陸輸"
+  },
+  {
+   "code": "93",
+   "lic_type": "衛部醫器製壹"
+  },
+  {
+   "code": "94",
+   "lic_type": "衛部醫器輸壹"
+  },
+  {
+   "code": "95",
+   "lic_type": "衛部醫器外製"
+  },
+  {
+   "code": "96",
+   "lic_type": "衛部醫器陸輸壹"
+  },
+  {
+   "code": "97",
+   "lic_type": "衛部醫器外製壹"
+  },
+  {
+   "code": "99",
+   "lic_type": "衛署菌製"
+  },
+  {
+   "code": "07",
+   "lic_type": "衛署粧製"
+  },
+  {
+   "code": "08",
+   "lic_type": "衛署粧輸"
+  },
+  {
+   "code": "40",
+   "lic_type": "衛署粧陸輸"
+  },
+  {
+   "code": "57",
+   "lic_type": "衛部粧製"
+  },
+  {
+   "code": "58",
+   "lic_type": "衛部粧輸"
+  },
+  {
+   "code": "90",
+   "lic_type": "衛部粧陸輸"
+  },
+  {
+   "code": "11",
+   "lic_type": "衛署色輸"
+  },
+  {
+   "code": "31",
+   "lic_type": "衛署色製"
+  }
+ ]
+}

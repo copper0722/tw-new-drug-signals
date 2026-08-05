@@ -1,0 +1,6 @@
+# Test-only. The reference modules under reference/ import nothing outside the
+# standard library — that is the point, and a test pins it
+# (test_documented_copy_set_actually_runs). This file exists because `make test`
+# used to fail with a bare ModuleNotFoundError, which tells a first-time reader
+# nothing about what to install.
+pytest>=7.0

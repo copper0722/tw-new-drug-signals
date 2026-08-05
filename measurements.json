@@ -1,0 +1,1338 @@
+{
+ "_meta": {
+  "purpose": "本 repo 每一個對外出現的數字，逐筆記錄它的量測時間、母體、方法與重跑方式。文件引用 id，不再裸寫數字。",
+  "rule": "一個數字要嘛可重跑，要嘛誠實標示它需要本 repo 不發布的資料；兩者都做不到就刪掉。刪掉是合法而且常常正確的結果。",
+  "generated": "2026-08-05",
+  "id_format": "M-NN",
+  "fields": {
+   "claim": "這個數字在說什麼（一句話）",
+   "value": "值。分子／分母另存於 numerator / denominator",
+   "measured_at": "量測時刻。moving 類必須到分鐘",
+   "population": "母體是什麼",
+   "method": "怎麼算的。方法變了就是另一個數字，不可互相比較",
+   "volatility": "static-fixture = 隨附檔案算得出來，永遠一樣 | moves-with-upstream = 上游改就變 | moving = 量測當下就在變（有背景作業在跑）| repo-internal = 從本 repo 自己的檔案數得出來",
+   "reproduce.kind": "fixture = 隨附檔案就能跑 | repo-internal = 數本 repo 自己的檔案 | private-data = 需要本 repo 不發布的資料 | public-source = 需要向公開來源重抓",
+   "caveat": "引用這個數字時必須一起講的話"
+  },
+  "private_data_note": "kind=private-data 的項目需要一份完整的許可證資料表（每列一張許可證，含已註銷）與一份新成分新藥公告清單。本 repo 刻意不發布任何資料鏡像，取得途徑也不在本 repo 範圍內（見 README〈刻意不做〉）。食藥署的公開資料 API 目錄在 https://data.fda.gov.tw/ ，公告清單在 https://www.fda.gov.tw/TC/siteList.aspx?sid=2712 。附上的 SQL 假設你自己建了等價的表，欄位名依你自己的 schema 調整。",
+  "verify": "make measurements（跑 kind=fixture 與 kind=repo-internal 的項目，並檢查文件引用的 id 都存在）"
+ },
+ "measurements": [
+  {
+   "id": "M-01",
+   "claim": "Lic.Type（字別）碼表是 61 筆的封閉集合。",
+   "value": 61,
+   "measured_at": "2026-08-05",
+   "population": "Lic.Type 碼表全量",
+   "method": "計算碼表回應裡的項目數。",
+   "volatility": "moves-with-upstream",
+   "source": "https://lmspiq.fda.gov.tw/api/public/codes/search/full/codeKind/Lic.Type",
+   "reproduce": {
+    "kind": "fixture",
+    "command": "python3 reference/measure_fixtures.py M-01"
+   },
+   "cited_in": [
+    "docs/00-sources.md",
+    "docs/03-marker-nme-report.md",
+    "docs/06-permit-identity-and-dates.md",
+    "docs/07-controls-and-pitfalls.md",
+    "fixtures/README.md"
+   ]
+  },
+  {
+   "id": "M-02",
+   "claim": "61 筆字別裡，藥品類（字別名稱不含「器」「粧」「色」）有 31 種。",
+   "value": 31,
+   "numerator": 31,
+   "denominator": 61,
+   "measured_at": "2026-08-05",
+   "population": "Lic.Type 碼表全量",
+   "method": "字別名稱不含「器」「粧」「色」者計入。這是一個字串判準，不是食藥署公布的分類欄位——碼表沒有分類欄位。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-01",
+   "reproduce": {
+    "kind": "fixture",
+    "command": "python3 reference/measure_fixtures.py M-02"
+   },
+   "caveat": "這是本 repo 自己下的字串判準，不是官方分類。",
+   "cited_in": [
+    "docs/00-sources.md",
+    "fixtures/README.md"
+   ]
+  },
+  {
+   "id": "M-03",
+   "claim": "Restraint.Dr（限制項目）碼表是 91 筆的封閉集合。",
+   "value": 91,
+   "measured_at": "2026-08-05",
+   "population": "Restraint.Dr 碼表全量",
+   "method": "計算碼表回應裡的項目數。",
+   "volatility": "moves-with-upstream",
+   "source": "https://lmspiq.fda.gov.tw/api/public/codes/search/full/codeKind/Restraint.Dr",
+   "reproduce": {
+    "kind": "fixture",
+    "command": "python3 reference/measure_fixtures.py M-03"
+   },
+   "cited_in": [
+    "docs/00-sources.md",
+    "docs/02-marker-restraint-07.md",
+    "docs/07-controls-and-pitfalls.md",
+    "fixtures/README.md"
+   ]
+  },
+  {
+   "id": "M-04",
+   "claim": "91 筆限制項目碼裡，名稱含「監視」的有 8 個：07、1K、1L、24、25、26、27、28。",
+   "value": 8,
+   "numerator": 8,
+   "denominator": 91,
+   "measured_at": "2026-08-05",
+   "population": "Restraint.Dr 碼表全量",
+   "method": "名稱字串含「監視」者計入。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-03",
+   "reproduce": {
+    "kind": "fixture",
+    "command": "python3 reference/measure_fixtures.py M-04"
+   },
+   "caveat": "這 8 個是「EXACT-07 比對器」的負控來源，不是「這些藥不是新藥」的分類。",
+   "cited_in": [
+    "docs/00-sources.md",
+    "docs/02-marker-restraint-07.md",
+    "docs/07-controls-and-pitfalls.md",
+    "fixtures/README.md"
+   ]
+  },
+  {
+   "id": "M-05",
+   "claim": "許可證資料共 66,440 張（含已註銷）。這是 moiety 首見的基線。",
+   "value": 66440,
+   "measured_at": "2026-08-05T14:30+08:00",
+   "population": "許可證全表",
+   "method": "count(*)。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FROM <你自己的許可證表>;",
+    "note": "需要完整許可證表；本 repo 不發布資料鏡像。"
+   },
+   "cited_in": [
+    "README.md",
+    "docs/00-sources.md",
+    "docs/02-marker-restraint-07.md",
+    "docs/04-moiety-first-appearance.md",
+    "docs/05-crosswalk.md",
+    "docs/06-permit-identity-and-dates.md",
+    "docs/07-controls-and-pitfalls.md",
+    "fixtures/README.md"
+   ]
+  },
+  {
+   "id": "M-06",
+   "claim": "現行在案、劑型別為製劑或菌疫、且有發證日的許可證共 19,705 張。這是「現行藥品」的範圍。",
+   "value": 19705,
+   "measured_at": "2026-08-05T14:30+08:00",
+   "population": "許可證全表",
+   "method": "未註銷 + permit_type ∈ {製　劑, 菌　疫} + 發證日非空。permit_type 以全形空白 U+3000 補齊，比對時不要直接貼字元（見 docs/00 §E）。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FROM <許可證表> WHERE 已註銷 IS FALSE AND permit_type IN ('製'||chr(12288)||'劑','菌'||chr(12288)||'疫') AND nullif(issue_date,'') IS NOT NULL;"
+   },
+   "cited_in": [
+    "README.md",
+    "docs/00-sources.md",
+    "docs/04-moiety-first-appearance.md",
+    "docs/06-permit-identity-and-dates.md",
+    "docs/07-controls-and-pitfalls.md"
+   ]
+  },
+  {
+   "id": "M-07",
+   "claim": "許可證資料裡實際出現過的字別只有 26 種，碼表卻列 61 種（M-01）。碼表是可能值，不是出現值。",
+   "value": 26,
+   "measured_at": "2026-08-05T14:40+08:00",
+   "population": "許可證全表 66,440 張",
+   "method": "count(DISTINCT 許可證號中「字第」之前那段)。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(DISTINCT substring(permit_number from '^(.+?)字第')) FROM <許可證表>;"
+   },
+   "caveat": "26 與 61 不可互相引用：一個是出現值，一個是可能值。",
+   "cited_in": [
+    "docs/00-sources.md",
+    "fixtures/README.md"
+   ]
+  },
+  {
+   "id": "M-08",
+   "claim": "現行清單 19,705 張裡，發證日期的覆蓋率是 100%。",
+   "value": "100%",
+   "numerator": 19705,
+   "denominator": 19705,
+   "measured_at": "2026-08-05T14:30+08:00",
+   "population": "M-06 的 19,705 張",
+   "method": "計算發證日非空的列數。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FILTER (WHERE issue_date IS NOT NULL), count(*) FROM <你的現行清單>;"
+   },
+   "caveat": "這個 100% 是套套邏輯：有發證日本來就是 M-06 的篩選條件之一。它不是資料品質的證據。",
+   "cited_in": [
+    "docs/00-sources.md",
+    "docs/06-permit-identity-and-dates.md",
+    "docs/07-controls-and-pitfalls.md"
+   ]
+  },
+  {
+   "id": "M-09",
+   "claim": "同一批 19,705 張裡，核准日期只有 286 張有值（1.5%）。照核准日排序會把清單縮成 286 列。",
+   "value": "1.5%",
+   "numerator": 286,
+   "denominator": 19705,
+   "measured_at": "2026-08-05T14:30+08:00",
+   "population": "M-06 的 19,705 張",
+   "method": "計算核准日非空的列數。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FILTER (WHERE approval_date IS NOT NULL), count(*) FROM <你的現行清單>;"
+   },
+   "cited_in": [
+    "docs/00-sources.md",
+    "docs/06-permit-identity-and-dates.md"
+   ]
+  },
+  {
+   "id": "M-10",
+   "claim": "新成分新藥核准審查報告摘要共 206 則公告。",
+   "value": 206,
+   "measured_at": "2026-08-05T14:35+08:00",
+   "population": "該清單全量",
+   "method": "以標題為公告識別去重。",
+   "volatility": "moves-with-upstream",
+   "source": "https://www.fda.gov.tw/TC/siteList.aspx?sid=2712",
+   "reproduce": {
+    "kind": "public-source",
+    "note": "向上列公開網頁重抓整份清單後計數。本 repo 只隨附其中 46 則標題（M-26），不鏡像整份清單。"
+   },
+   "cited_in": [
+    "README.md",
+    "docs/00-sources.md",
+    "docs/03-marker-nme-report.md",
+    "fixtures/README.md",
+    "reference/tw_nme_titles.py"
+   ]
+  },
+  {
+   "id": "M-11",
+   "claim": "206 則公告的標題展開後對應 273 張許可證。",
+   "value": 273,
+   "measured_at": "2026-08-05T14:35+08:00",
+   "population": "M-10 的 206 則公告",
+   "method": "逐則解析標題的許可證號酬載並展開範圍／列舉（reference/tw_nme_titles.py），再以許可證號去重。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-10",
+   "reproduce": {
+    "kind": "public-source",
+    "command": "python3 reference/tw_nme_titles.py --json --file <你自己抓下來的 206 則標題>",
+    "note": "隨附的 46 則樣本跑不出 273——那是全量的數字。"
+   },
+   "cited_in": [
+    "README.md",
+    "docs/00-sources.md",
+    "docs/03-marker-nme-report.md",
+    "reference/tw_nme_titles.py"
+   ]
+  },
+  {
+   "id": "M-12",
+   "claim": "展開出來的 273 張候選，273 張全部存在於許可證資料裡。",
+   "value": "273 / 273",
+   "numerator": 273,
+   "denominator": 273,
+   "measured_at": "2026-08-05T14:35+08:00",
+   "population": "M-11 的 273 張候選",
+   "method": "拿候選許可證號到許可證表反查存在性。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料 + M-10",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FILTER (WHERE p.permit_number IS NOT NULL), count(*) FROM <你的公告展開結果> c LEFT JOIN <許可證表> p USING (permit_number);"
+   },
+   "caveat": "這是有意義的 100%：拿自己的解析結果去對一份不是自己產生的資料。它證明這一輪展開沒有造出虛構許可證，不證明解析沒有漏抓。",
+   "cited_in": [
+    "docs/00-sources.md",
+    "docs/03-marker-nme-report.md",
+    "docs/07-controls-and-pitfalls.md"
+   ]
+  },
+  {
+   "id": "M-13",
+   "claim": "273 張裡有 256 張進入現行在案清單；另外 17 張是 15 張已註銷加 2 張原料藥。",
+   "value": 256,
+   "numerator": 256,
+   "denominator": 273,
+   "measured_at": "2026-08-05T14:40+08:00",
+   "population": "M-11 的 273 張",
+   "method": "與 M-06 的現行清單取交集；差集逐筆檢視其狀態與劑型別。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料 + M-10",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT p.approval_status, p.permit_type, count(*) FROM <公告展開結果> c JOIN <許可證表> p USING (permit_number) WHERE c.permit_number NOT IN (SELECT permit_number FROM <現行清單>) GROUP BY 1,2;"
+   },
+   "cited_in": [
+    "docs/00-sources.md",
+    "docs/05-crosswalk.md"
+   ]
+  },
+  {
+   "id": "M-14",
+   "claim": "公告日減發證日的中位數是 69 天。",
+   "value": 69,
+   "unit": "天",
+   "n": 273,
+   "measured_at": "2026-08-05T14:35+08:00",
+   "population": "M-11 的 273 張（全部都有發證日）",
+   "method": "percentile_cont(0.5)，以許可證的 issueDate 為基準。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料 + M-10",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY (c.report_date - p.issue_date)) FROM <公告展開結果> c JOIN <許可證表> p USING (permit_number);"
+   },
+   "caveat": "以 issueDate 為基準。至少有一張證的 issueDate 是換發日而非最初核發日（M-21），中位數對單一離群值穩健，但這個基準的限制要一起講。",
+   "cited_in": [
+    "README.md",
+    "docs/00-sources.md",
+    "docs/02-marker-restraint-07.md",
+    "docs/03-marker-nme-report.md",
+    "docs/05-crosswalk.md",
+    "docs/08-if-you-build-a-ledger.md"
+   ]
+  },
+  {
+   "id": "M-15",
+   "claim": "落差範圍是 −2,232 天到 +1,093 天，其中只有 1 則公告的公告日早於發證日。",
+   "value": "−2,232 … +1,093",
+   "unit": "天",
+   "n": 273,
+   "measured_at": "2026-08-05T14:35+08:00",
+   "population": "M-11 的 273 張",
+   "method": "min / max / count(lag < 0)。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-14",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT min(c.report_date - p.issue_date), max(c.report_date - p.issue_date), count(*) FILTER (WHERE c.report_date < p.issue_date) FROM <公告展開結果> c JOIN <許可證表> p USING (permit_number);"
+   },
+   "caveat": "下界 −2,232 不是一個發布現象，是一個資料缺陷：那唯一一筆是 衛部菌疫輸字第001082號，它的 issueDate 是換發日 2025-01-14（M-21）。要談「公告最多早幾天」時，這個下界不能拿來用。",
+   "cited_in": [
+    "docs/00-sources.md",
+    "docs/03-marker-nme-report.md",
+    "docs/06-permit-identity-and-dates.md"
+   ]
+  },
+  {
+   "id": "M-16",
+   "claim": "逐年公告則數：2012=7、2013=2、2014=3、2015/2016/2017=0、2018=18、2019=15、2020=19、2021=22、2022=22、2023=32、2024=22、2025=26、2026 至今=18。",
+   "value": {
+    "2012": 7,
+    "2013": 2,
+    "2014": 3,
+    "2015": 0,
+    "2016": 0,
+    "2017": 0,
+    "2018": 18,
+    "2019": 15,
+    "2020": 19,
+    "2021": 22,
+    "2022": 22,
+    "2023": 32,
+    "2024": 22,
+    "2025": 26,
+    "2026": 18
+   },
+   "n": 206,
+   "measured_at": "2026-08-05T14:35+08:00",
+   "population": "M-10 的 206 則",
+   "method": "按公告日年份分組計數。2015–2017 是資料裡完全沒有該年份的列，不是缺值。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-10",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT extract(year FROM report_date)::int, count(DISTINCT title) FROM <公告清單> GROUP BY 1 ORDER BY 1;"
+   },
+   "caveat": "2026 是部分年度。完整年度自 2018 起落在 15–32 之間；三整年掛零是這個清單的真實形態，所以任何以「多久沒新公告」為條件的告警，門檻要用月為單位。",
+   "cited_in": [
+    "docs/00-sources.md",
+    "docs/03-marker-nme-report.md",
+    "docs/08-if-you-build-a-ledger.md"
+   ]
+  },
+  {
+   "id": "M-17",
+   "claim": "206 則標題裡，序號酬載使用範圍或列舉寫法的有 36 則（17.5%）。",
+   "value": "17.5%",
+   "numerator": 36,
+   "denominator": 206,
+   "measured_at": "2026-08-05T14:44+08:00",
+   "population": "M-10 的 206 則標題",
+   "method": "標題中「第」之後的序號酬載含 reference/tw_nme_titles.py 的 RANGE_SEPARATORS 或 LIST_SEPARATORS 任一字元。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-10",
+   "reproduce": {
+    "kind": "public-source",
+    "note": "需要全部 206 則標題。隨附樣本上的對應數字見 M-27。"
+   },
+   "cited_in": [
+    "docs/03-marker-nme-report.md"
+   ]
+  },
+  {
+   "id": "M-18",
+   "claim": "206 則標題裡，實際對到超過一張許可證的有 41 則（19.9%）。比 M-17 多的 5 則，是標題裡寫了兩個完整許可證號、沒有用分隔符。",
+   "value": "19.9%",
+   "numerator": 41,
+   "denominator": 206,
+   "measured_at": "2026-08-05T14:44+08:00",
+   "population": "M-10 的 206 則標題",
+   "method": "以公告在許可證資料裡實際對應的許可證號集合大小 > 1 計數。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-10",
+   "reproduce": {
+    "kind": "public-source",
+    "note": "需要全部 206 則標題與其展開結果。"
+   },
+   "caveat": "36 與 41 量的不是同一件事：36 是「酬載裡有分隔符」，41 是「實際對到幾張證」。",
+   "cited_in": [
+    "docs/03-marker-nme-report.md",
+    "fixtures/README.md"
+   ]
+  },
+  {
+   "id": "M-19",
+   "claim": "只取每則公告的第一張證，273 張裡會漏掉 67 張（24.5%）。",
+   "value": "24.5%",
+   "numerator": 67,
+   "denominator": 273,
+   "measured_at": "2026-08-05T14:44+08:00",
+   "population": "M-11 的 273 張",
+   "method": "sum(每則公告的證數 − 1)。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-10",
+   "reproduce": {
+    "kind": "public-source",
+    "note": "需要全部 206 則標題與其展開結果。"
+   },
+   "cited_in": [
+    "docs/03-marker-nme-report.md",
+    "docs/05-crosswalk.md",
+    "docs/07-controls-and-pitfalls.md",
+    "reference/tw_nme_titles.py"
+   ]
+  },
+  {
+   "id": "M-20",
+   "claim": "已量測到的分隔符與出現則數：`-` 26 則、`、` 7 則、`/` 2 則、`~` 1 則。",
+   "value": {
+    "-": 26,
+    "、": 7,
+    "/": 2,
+    "~": 1
+   },
+   "n": 206,
+   "measured_at": "2026-08-05T14:44+08:00",
+   "population": "M-10 的 206 則標題",
+   "method": "逐則取序號酬載裡出現過的分隔符，逐字元計則數（一則出現兩種就計兩次）。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-10",
+   "reproduce": {
+    "kind": "public-source",
+    "note": "需要全部 206 則標題。"
+   },
+   "caveat": "這是已量測到的形態，不是保證的完整集合。參考實作另收了全形變體，因為成本為零。",
+   "cited_in": [
+    "docs/03-marker-nme-report.md",
+    "reference/tw_nme_titles.py"
+   ]
+  },
+  {
+   "id": "M-22",
+   "claim": "用貪婪中文字元類 `[一-鿿]+字第` 取字別，206 則裡有 20 則抓到不在 61 筆碼表內的字串——19 則是把公司名黏了上去，1 則是來源錯字「衛部藥」。",
+   "value": 20,
+   "numerator": 20,
+   "denominator": 206,
+   "measured_at": "2026-08-05T14:44+08:00",
+   "population": "M-10 的 206 則標題",
+   "method": "re.search(r'([一-鿿]+)字第', title) 的擷取結果不在 M-01 的 61 筆集合內即計入。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-10",
+   "reproduce": {
+    "kind": "public-source",
+    "note": "需要全部 206 則標題。隨附樣本上的對應數字見 M-28。"
+   },
+   "cited_in": [
+    "docs/03-marker-nme-report.md",
+    "docs/07-controls-and-pitfalls.md",
+    "fixtures/README.md",
+    "reference/tw_nme_titles.py"
+   ]
+  },
+  {
+   "id": "M-23",
+   "claim": "206 則裡有 4 則的序號以字母 R 開頭（放射性藥品）。以 `[0-9]` 錨定序號會整批漏掉。",
+   "value": 4,
+   "numerator": 4,
+   "denominator": 206,
+   "measured_at": "2026-08-05T14:44+08:00",
+   "population": "M-10 的 206 則標題",
+   "method": "標題含 `第\\s*R[0-9]`。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-10",
+   "reproduce": {
+    "kind": "fixture",
+    "command": "python3 reference/measure_fixtures.py M-23",
+    "note": "這 4 則全部收在隨附樣本裡，所以樣本上的數字與全量相同。"
+   },
+   "cited_in": [
+    "docs/03-marker-nme-report.md",
+    "docs/07-controls-and-pitfalls.md",
+    "fixtures/README.md",
+    "reference/tw_nme_titles.py"
+   ]
+  },
+  {
+   "id": "M-24",
+   "claim": "206 則裡有 2 則標題完全沒有「號」字。以「號」當序號終止符會漏掉。",
+   "value": 2,
+   "numerator": 2,
+   "denominator": 206,
+   "measured_at": "2026-08-05T14:44+08:00",
+   "population": "M-10 的 206 則標題",
+   "method": "標題字串不含「號」。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-10",
+   "reproduce": {
+    "kind": "fixture",
+    "command": "python3 reference/measure_fixtures.py M-24",
+    "note": "這 2 則全部收在隨附樣本裡，所以樣本上的數字與全量相同。"
+   },
+   "cited_in": [
+    "docs/03-marker-nme-report.md",
+    "fixtures/README.md",
+    "reference/tw_nme_titles.py"
+   ]
+  },
+  {
+   "id": "M-25",
+   "claim": "把 reference/tw_nme_titles.py 跑過全部 206 則標題，205 則的結果與許可證資料裡實際登錄的證號集合完全一致；唯一不一致的一則是來源錯字「衛部藥字第027731號」，參考實作依設計回報無法解析而不是猜。",
+   "value": "205 / 206",
+   "numerator": 205,
+   "denominator": 206,
+   "measured_at": "2026-08-05T14:44+08:00",
+   "population": "M-10 的 206 則標題",
+   "method": "逐則比較 extract_permits(title) 與該公告在資料裡對應的許可證號集合，集合相等才算一致。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-10",
+   "reproduce": {
+    "kind": "private-data",
+    "note": "需要全部 206 則標題，以及一份把公告對應到許可證號的資料。"
+   },
+   "caveat": "這是端對端的外部檢定，不是自我一致性檢查——期望值來自公告清單，不是本 repo 產生的。唯一的不一致是刻意的拒絕，不是失敗。",
+   "cited_in": [
+    "docs/03-marker-nme-report.md"
+   ]
+  },
+  {
+   "id": "M-26",
+   "claim": "隨附的標題樣本共 46 列：42 列逐字取自真實公告，4 列是本 repo 自製的合成負控。",
+   "value": 46,
+   "breakdown": {
+    "real": 42,
+    "synthetic": 4
+   },
+   "measured_at": "2026-08-05",
+   "population": "fixtures/nme_titles.sample.jsonl",
+   "method": "數列數，按 origin 欄位分組。",
+   "volatility": "static-fixture",
+   "source": "fixtures/nme_titles.sample.jsonl",
+   "reproduce": {
+    "kind": "fixture",
+    "command": "python3 reference/measure_fixtures.py M-26"
+   },
+   "caveat": "樣本不是母體。要引用全量數字請看 M-10 起的各項。",
+   "cited_in": [
+    "docs/03-marker-nme-report.md",
+    "fixtures/README.md"
+   ]
+  },
+  {
+   "id": "M-27",
+   "claim": "隨附樣本的 42 列真實標題裡，15 列對到超過一張許可證。",
+   "value": 15,
+   "numerator": 15,
+   "denominator": 42,
+   "measured_at": "2026-08-05",
+   "population": "fixtures/nme_titles.sample.jsonl 的 42 列 real",
+   "method": "expected 欄位的許可證號數 > 1。",
+   "volatility": "static-fixture",
+   "source": "fixtures/nme_titles.sample.jsonl",
+   "reproduce": {
+    "kind": "fixture",
+    "command": "python3 reference/measure_fixtures.py M-27"
+   },
+   "caveat": "樣本刻意加重多證形態，比例高於全量的 M-18。樣本比例不可拿來代表母體。",
+   "cited_in": [
+    "fixtures/README.md"
+   ]
+  },
+  {
+   "id": "M-28",
+   "claim": "隨附樣本的 42 列真實標題裡，15 列會讓貪婪中文字元類抓到不在碼表內的字別。",
+   "value": 15,
+   "numerator": 15,
+   "denominator": 42,
+   "measured_at": "2026-08-05",
+   "population": "fixtures/nme_titles.sample.jsonl 的 42 列 real",
+   "method": "同 M-22 的判準，跑在樣本上。",
+   "volatility": "static-fixture",
+   "source": "fixtures/nme_titles.sample.jsonl",
+   "reproduce": {
+    "kind": "fixture",
+    "command": "python3 reference/measure_fixtures.py M-28"
+   },
+   "caveat": "樣本刻意加重這個形態，比例高於全量的 M-22。",
+   "cited_in": [
+    "docs/03-marker-nme-report.md",
+    "fixtures/README.md"
+   ]
+  },
+  {
+   "id": "M-29",
+   "claim": "「序號後面直接接英文品名」這個形態，在 206 則真實標題裡出現 0 次。隨附樣本裡那一列是標成 synthetic 的預防性守衛。",
+   "value": 0,
+   "numerator": 0,
+   "denominator": 206,
+   "measured_at": "2026-08-05T14:44+08:00",
+   "population": "M-10 的 206 則標題",
+   "method": "regex `第\\s*[0-9]{6}\\s*[A-Za-z]` 比對。",
+   "volatility": "moves-with-upstream",
+   "source": "同 M-10",
+   "reproduce": {
+    "kind": "public-source",
+    "note": "需要全部 206 則標題。"
+   },
+   "caveat": "0 是「沒觀察到」，不是「不可能」。這個守衛的存在理由是前者。",
+   "cited_in": [
+    "fixtures/README.md",
+    "reference/tests/test_nme_titles.py"
+   ]
+  },
+  {
+   "id": "M-30",
+   "claim": "隨附的成分樣本共 25 列：24 列真實、1 列合成負控。",
+   "value": 25,
+   "breakdown": {
+    "real": 24,
+    "synthetic": 1
+   },
+   "measured_at": "2026-08-05",
+   "population": "fixtures/ingredients.sample.jsonl",
+   "method": "數列數，按 origin 欄位分組。",
+   "volatility": "static-fixture",
+   "source": "fixtures/ingredients.sample.jsonl",
+   "reproduce": {
+    "kind": "fixture",
+    "command": "python3 reference/measure_fixtures.py M-30"
+   },
+   "cited_in": [
+    "fixtures/README.md"
+   ]
+  },
+  {
+   "id": "M-31",
+   "claim": "現行清單 19,705 張裡，成分欄為空的有 140 張；再加上正規化後不剩任何 moiety 的 16 張，共 156 張無法分類。",
+   "value": 156,
+   "breakdown": {
+    "empty_ingredient_field": 140,
+    "normalised_to_nothing": 16
+   },
+   "denominator": 19705,
+   "measured_at": "2026-08-05T14:38+08:00",
+   "population": "M-06 的 19,705 張",
+   "method": "成分欄 trim 後為空 → 140；ingredient_missing 為真但成分欄非空 → 16。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FILTER (WHERE btrim(coalesce(active_ingredient,''))=''), count(*) FILTER (WHERE ingredient_missing) FROM <你的清單表>;"
+   },
+   "caveat": "這 156 列必須以「成分資料缺漏」出現在報表上。消失的列和不存在的列長得一模一樣。",
+   "cited_in": [
+    "docs/04-moiety-first-appearance.md",
+    "docs/07-controls-and-pitfalls.md",
+    "docs/08-if-you-build-a-ledger.md"
+   ]
+  },
+  {
+   "id": "M-32",
+   "claim": "現行清單 19,705 張裡，19,360 張至少有一個 ATC 碼（98.2%）。",
+   "value": "98.2%",
+   "numerator": 19360,
+   "denominator": 19705,
+   "measured_at": "2026-08-05T14:38+08:00",
+   "population": "M-06 的 19,705 張",
+   "method": "ATC 陣列非空者計入。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FILTER (WHERE coalesce(cardinality(atc_codes),0)>0), count(*) FROM <你的清單表>;"
+   },
+   "cited_in": [
+    "docs/04-moiety-first-appearance.md"
+   ]
+  },
+  {
+   "id": "M-33",
+   "claim": "ATC 的缺口不是隨機分布的，它集中在新分子上：發證於 2026 年、被判為 moiety 首見的 33 張證裡，29 張完全沒有 ATC（87.9%）；同一時點全清單的無 ATC 比例只有 1.8%（345 / 19,705）。差距約 50 倍。",
+   "value": "87.9% vs 1.8%",
+   "numerator": 29,
+   "denominator": 33,
+   "comparison": {
+    "numerator": 345,
+    "denominator": 19705,
+    "value": "1.8%"
+   },
+   "measured_at": "2026-08-05T14:38+08:00",
+   "population": "M-06 的 19,705 張，及其中發證日 ≥ 2026-01-01 且 is_new_moiety 為真的 33 張",
+   "method": "兩個比例各自計算後相比。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FILTER (WHERE coalesce(cardinality(atc_codes),0)=0), count(*) FROM <你的清單表> WHERE is_new_moiety AND issue_date >= '2026-01-01';"
+   },
+   "caveat": "這條取代了早期版本的寫法「四個 2026 年的新分子全部沒有 ATC」。那句話對它點名的四個分子成立，但只列四個會讀成母體就是四個——實際上 2026 年被旗標的是 33 張。舉例可以只舉四個，論證要用這個比例。",
+   "cited_in": [
+    "README.md",
+    "docs/00-sources.md",
+    "docs/01-what-counts-as-new.md",
+    "docs/04-moiety-first-appearance.md",
+    "docs/05-crosswalk.md"
+   ]
+  },
+  {
+   "id": "M-34",
+   "claim": "以 is_new_moiety 為真的許可證，按發證年統計其 distinct moiety 集合數：2015=35、2016=34、2017=41、2018=35、2019=31、2020=35、2021=42、2022=33、2023=34、2024=44、2025=50、2026 至今=26。",
+   "value": {
+    "2015": 35,
+    "2016": 34,
+    "2017": 41,
+    "2018": 35,
+    "2019": 31,
+    "2020": 35,
+    "2021": 42,
+    "2022": 33,
+    "2023": 34,
+    "2024": 44,
+    "2025": 50,
+    "2026": 26
+   },
+   "measured_at": "2026-08-05T14:38+08:00",
+   "population": "M-06 的 19,705 張中發證日 ≥ 2015-01-01 者",
+   "method": "count(DISTINCT moieties::text) FILTER (WHERE is_new_moiety)，按發證年分組。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT extract(year FROM issue_date)::int AS yr, count(DISTINCT moieties::text) FILTER (WHERE is_new_moiety) FROM <你的清單表> WHERE issue_date >= '2015-01-01' GROUP BY 1 ORDER BY 1;"
+   },
+   "caveat": "2026 是部分年度（資料截至發證日 2026-07-07，見 M-45），不可拿去比完整年度的帶。完整年度 2015–2025 落在 31–50 之間——那個帶是從這組數字讀出來的，所以它是內部一致性檢查，不是外部驗證。本 repo 沒有任何獨立來源可以佐證台灣每年的新分子數量級。",
+   "cited_in": [
+    "docs/04-moiety-first-appearance.md",
+    "docs/07-controls-and-pitfalls.md"
+   ]
+  },
+  {
+   "id": "M-35",
+   "claim": "已公告且仍在現行清單裡的 256 張證，對上自算 moiety 首見旗標：首見・單方 235、首見・複方 14、非首見 7，合計 256。",
+   "value": {
+    "first_single": 235,
+    "first_combination": 14,
+    "not_first": 7,
+    "total": 256
+   },
+   "measured_at": "2026-08-05T14:33+08:00",
+   "population": "M-13 的 256 張",
+   "method": "交叉統計。以 issueDate 為首見排序鍵（見 caveat）。",
+   "volatility": "moving",
+   "source": "食藥署許可證資料 + M-10",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FILTER (WHERE is_new_moiety AND NOT coalesce(is_new_combination,false)), count(*) FILTER (WHERE is_new_moiety AND coalesce(is_new_combination,false)), count(*) FILTER (WHERE NOT is_new_moiety), count(*) FROM <你的清單表> WHERE permit_number IN (SELECT permit_number FROM <公告展開結果>);"
+   },
+   "caveat": "首見判定以 issueDate 排序。已知 issueDate 不保證是最初核發日（M-21），而改用 oriIssueDate 的回填尚未完成，所以這組數字是「2026-08-05、以 issueDate 為鍵」的記錄，不是現行值。",
+   "cited_in": [
+    "docs/05-crosswalk.md"
+   ]
+  },
+  {
+   "id": "M-36",
+   "claim": "食藥署公告為新成分新藥、且仍在現行清單裡的 256 張證，自算旗標抓到 249 張。",
+   "value": "97.3%",
+   "numerator": 249,
+   "denominator": 256,
+   "measured_at": "2026-08-05T14:33+08:00",
+   "population": "M-13 的 256 張",
+   "method": "以 issueDate 為首見排序鍵計算。",
+   "volatility": "moving",
+   "source": "食藥署許可證資料 + M-10",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FILTER (WHERE is_new_moiety), count(*) FROM <你的清單表> WHERE permit_number IN (SELECT permit_number FROM <公告展開結果>);"
+   },
+   "caveat": "**引用這個數字一定要連方法一起引用，而且不可以寫成當前值。** 三件事：(1) 它是 2026-08-05、以 issueDate 為鍵的記錄；(2) issueDate 已知在至少一張證上是換發日而非最初核發日（M-21），改用 oriIssueDate 的回填尚未進入首見計算，屆時是另一個方法、另一個數字，兩者不可比較；(3) 它是單向的召回率，不是準確率——反方向見 M-38。",
+   "cited_in": [
+    "docs/05-crosswalk.md"
+   ]
+  },
+  {
+   "id": "M-37",
+   "claim": "自算旗標在整份現行清單上共判定 1,467 張證為 moiety 首見。",
+   "value": 1467,
+   "denominator": 19705,
+   "measured_at": "2026-08-05T14:33+08:00",
+   "population": "M-06 的 19,705 張",
+   "method": "count(*) FILTER (WHERE is_new_moiety)。",
+   "volatility": "moving",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FILTER (WHERE is_new_moiety) FROM <你的清單表>;"
+   },
+   "caveat": "早期版本寫 1,472。那個值是清單套用日期更正（M-42）之前的：六張發證日被截位的老證原本各自竊走了自己那個 moiety 的首見旗標，更正後旗標數下降。這正是 M-42 說的機制，只是這次的受害者是老藥。這個數字會隨每次清單重算而變動，引用時要帶時刻。",
+   "cited_in": [
+    "docs/05-crosswalk.md"
+   ]
+  },
+  {
+   "id": "M-38",
+   "claim": "1,467 張旗標裡，只有 249 張被食藥署公告確認過；其餘 1,218 張沒有任何外部確認。",
+   "value": 1218,
+   "numerator": 1218,
+   "denominator": 1467,
+   "measured_at": "2026-08-05T14:40+08:00",
+   "population": "M-37 的 1,467 張",
+   "method": "1,467 減去同時被旗標且被公告的 249 張（M-36 的分子）。",
+   "volatility": "moving",
+   "source": "食藥署許可證資料 + M-10",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FROM <你的清單表> WHERE is_new_moiety AND permit_number NOT IN (SELECT permit_number FROM <公告展開結果>);"
+   },
+   "caveat": "早期版本寫 1,216，算式是 1,472 − 256。那個減法減錯了東西：256 是「已公告且在現行清單」的張數，其中有 7 張並沒有被旗標（M-35），所以該減的是 249 不是 256。兩個被減的數都是真的，差值卻從來沒有被查證過——這是「組出來的數字沒有被觀察過」的標準形態。現在的 1,218 是直接查出來的，不是相減出來的。",
+   "cited_in": [
+    "docs/05-crosswalk.md",
+    "docs/07-controls-and-pitfalls.md",
+    "docs/08-if-you-build-a-ledger.md"
+   ]
+  },
+  {
+   "id": "M-39",
+   "claim": "七筆不一致逐筆的發證日與「現行清單裡同 moiety 最早」：001201 差 87 天、001209 差 95 天、001230 差 3,600 天、027899 差 0 天、028546 差 5,401 天、001309 差 47 天。001082 這一欄不適用。",
+   "value": {
+    "衛部菌疫輸字第001201號": 87,
+    "衛部菌疫輸字第001209號": 95,
+    "衛部菌疫輸字第001230號": 3600,
+    "衛部藥輸字第027899號": 0,
+    "衛部藥輸字第028546號": 5401,
+    "衛部菌疫輸字第001309號": 47
+   },
+   "n": 7,
+   "measured_at": "2026-08-05T14:45+08:00",
+   "population": "M-35 的 7 張非首見證",
+   "method": "該證的 issueDate 減去「現行清單裡任一相同 moiety 的最早 issueDate」。",
+   "volatility": "moving",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT t.permit_number, t.issue_date - (SELECT min(l.issue_date) FROM <清單表> l WHERE l.moieties && t.moieties) FROM <清單表> t WHERE t.permit_number IN (...七張...);"
+   },
+   "caveat": "**衛部菌疫輸字第001082號 沒有這個數字。** 早期版本填「1,639 天」，那是拿它的換發日 2025-01-14 去減 001133 的 2020-07-20 算出來的。001082 的 oriIssueDate 是 2018-05-10，比 001133 早，所以那個差距不是一個真實的間隔，是日期欄位選錯的產物，已刪除。另外，這一欄的基線是「現行清單」，與首見旗標的基線（含已註銷的全表）不同：027899 的 0 天就是這件事的極端形式。",
+   "cited_in": [
+    "docs/05-crosswalk.md"
+   ]
+  },
+  {
+   "id": "M-40",
+   "claim": "那 7 張非首見證，2026-08-05 逐筆查明細 API，7 張全部帶 `07 新藥監視`。",
+   "value": "7 / 7",
+   "numerator": 7,
+   "denominator": 7,
+   "measured_at": "2026-08-05",
+   "population": "M-35 的 7 張非首見證",
+   "method": "逐張呼叫明細 API，取 restraintItemsCode，比對碼 07。",
+   "volatility": "moves-with-upstream",
+   "source": "https://lmspiq.fda.gov.tw/api/public/sh/piq/1000/licSearch",
+   "reproduce": {
+    "kind": "public-source",
+    "command": "python3 reference/tfda_lic_query.py <licId>",
+    "note": "七次請求，每次間隔 30 秒。工具一次只吃一筆，這是刻意的。"
+   },
+   "caveat": "7/7 能講的是「這七張 `07` 一張也沒漏」，不能反過來講「因為帶 07 所以是法定新藥」。這七張之所以確定是新藥，是因為食藥署公告過。",
+   "cited_in": [
+    "docs/05-crosswalk.md"
+   ]
+  },
+  {
+   "id": "M-21",
+   "claim": "衛部菌疫輸字第001082號 的 issueDate 是 2025-01-14，但 oriIssueDate 是 2018-05-10、有效期間終止日是 2028-05-10、審查報告公告日是 2018-12-05。發證日欄位是換發日，不是最初核發日。",
+   "value": {
+    "issueDate": "2018-05-10 → 2025-01-14 (換發)",
+    "oriIssueDate": "2018-05-10",
+    "validDate": "2028-05-10",
+    "report_date": "2018-12-05"
+   },
+   "n": 1,
+   "measured_at": "2026-08-05",
+   "population": "單張許可證",
+   "method": "明細 API 逐欄比對，並與同字別鄰近序號（001081 發證 2018-04-25、001084 發證 2018-09-14）對照。",
+   "volatility": "moves-with-upstream",
+   "source": "https://lmspiq.fda.gov.tw/api/public/sh/piq/1000/licSearch",
+   "reproduce": {
+    "kind": "public-source",
+    "command": "python3 reference/tfda_lic_query.py 60001082"
+   },
+   "caveat": "n = 1。這證明「issueDate 可能不是最初核發日」，不提供任何母體比例——母體換發率沒有量測（見 M-43）。",
+   "cited_in": [
+    "docs/00-sources.md",
+    "docs/03-marker-nme-report.md",
+    "docs/05-crosswalk.md",
+    "docs/06-permit-identity-and-dates.md"
+   ]
+  },
+  {
+   "id": "M-41",
+   "claim": "全部 66,440 張裡，發證日早於 1930 年的有 27 張，其中 5 張在現行清單裡；最早值是 1911-01-03（衛署藥製字第033431號，已註銷）。",
+   "value": {
+    "all": 27,
+    "in_current_listing": 5,
+    "earliest": "1911-01-03"
+   },
+   "denominator": 66440,
+   "measured_at": "2026-08-05T14:42+08:00",
+   "population": "許可證全表",
+   "method": "發證日字串比較。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*), count(*) FILTER (WHERE 現行) FROM <許可證表> WHERE nullif(issue_date,'') < '1930/01/01';"
+   },
+   "caveat": "這些日期不是解析錯誤：直接向明細 API 查 01033862，它回傳的 issueDate 就是 1911-03-23。上游資料本身如此。",
+   "cited_in": [
+    "docs/06-permit-identity-and-dates.md"
+   ]
+  },
+  {
+   "id": "M-42",
+   "claim": "改用「與同字別鄰近序號矛盾」為判準，現行清單裡有 7 張證的發證日和它自己的許可證號互相矛盾。其中 6 張可以據鄰號得到有證據的更正值（5 張 mechanism、1 張 inferred），第 7 張沒有可推的依據，維持未解決。",
+   "value": {
+    "contradictory": 7,
+    "corrected": 6,
+    "mechanism": 5,
+    "inferred": 1,
+    "unresolved": 1
+   },
+   "measured_at": "2026-08-05",
+   "population": "M-06 的 19,705 張",
+   "method": "同一字別、序號相鄰的許可證發證日應相近；不相近者逐筆以鄰號區間檢定。逐筆更正值與依據見 docs/06。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "note": "需要完整許可證表以取得鄰號。逐筆的來源值、更正值、信心與依據全部列在 docs/06，可以直接對照明細 API 逐張查證。"
+   },
+   "caveat": "五張 mechanism 的形態一模一樣：月日與來源完全相同，民國年少了十位數。那是某一次轉換裡的一個截位，不是隨機壞值。另有 衛部藥陸輸字第000618號（發證日 2013-07-18，早於衛福部成立五日）性質不同，不歸為同一類，也不更正。",
+   "cited_in": [
+    "docs/05-crosswalk.md",
+    "docs/06-permit-identity-and-dates.md"
+   ]
+  },
+  {
+   "id": "M-43",
+   "claim": "兩個曾被誤用的代理指標：發證日早於同字別前一個序號的證 4,066 張（6.1%）；發證日到有效期間終止日短於 5 年的證 1,825 張（2.7%）。",
+   "value": {
+    "serial_inversion": "6.1%",
+    "sub_5y_validity": "2.7%"
+   },
+   "breakdown": {
+    "serial_inversion": {
+     "numerator": 4066,
+     "denominator": 66413
+    },
+    "sub_5y_validity": {
+     "numerator": 1825,
+     "denominator": 66439
+    }
+   },
+   "measured_at": "2026-08-05T14:43+08:00",
+   "population": "許可證全表中有發證日者",
+   "method": "序號倒置：同字別內按序號排序，比較相鄰兩筆的發證日。有效期間：終止日減發證日 < 5 年。",
+   "volatility": "moves-with-upstream",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "WITH p AS (SELECT substring(permit_number from '^(.+?)字第') lt, substring(permit_number from '字第(.+)號$') sn, to_date(issue_date,'YYYY/MM/DD') d FROM <許可證表> WHERE nullif(issue_date,'') IS NOT NULL), q AS (SELECT *, lag(d) OVER (PARTITION BY lt ORDER BY sn) prev FROM p) SELECT count(*) FILTER (WHERE prev IS NOT NULL AND d < prev), count(*) FILTER (WHERE prev IS NOT NULL) FROM q;"
+   },
+   "caveat": "**這兩個數字不能用來估計換發率，本 repo 不再拿它們做任何推論。** 換發不改序號，所以序號順序可以完全維持；有效期間也可以是任何長度。它們留在這裡是為了記錄一個被撤回的推論是建立在什麼上面。早期版本印的是 4,037 / 66,267，那組分子分母無法以任何寫得出來的查詢重現；上面這組是 2026-08-05 用附上的 SQL 重新量的。",
+   "cited_in": [
+    "docs/06-permit-identity-and-dates.md",
+    "docs/07-controls-and-pitfalls.md"
+   ]
+  },
+  {
+   "id": "M-44",
+   "claim": "本 repo 逐筆引用明細 API 結果的許可證共 11 張。2026-08-05 以 30 秒間隔取得，過程中未出現 422。",
+   "value": 11,
+   "permits": [
+    "衛部菌疫輸字第001328號",
+    "衛署藥製字第033862號",
+    "衛部藥輸字第029062號",
+    "衛部菌疫輸字第001082號",
+    "衛部藥輸字第028546號",
+    "衛部菌疫輸字第001230號",
+    "衛部藥輸字第026405號",
+    "衛部菌疫輸字第001201號",
+    "衛部菌疫輸字第001209號",
+    "衛部藥輸字第027899號",
+    "衛部菌疫輸字第001309號"
+   ],
+   "measured_at": "2026-08-05",
+   "population": "本 repo 的文件",
+   "method": "數 docs/ 裡出現過**明細 API 專屬**衍生事實（restraintItemsCode、oriIssueDate）的相異許可證號。`validDate` 刻意不算：它在整批清單資料裡就有（等同 expiry_date），不是明細 API 才拿得到的東西，把它算進來會讓這個數字量到別的東西。",
+   "volatility": "repo-internal",
+   "source": "本 repo 的 docs/",
+   "reproduce": {
+    "kind": "repo-internal",
+    "command": "python3 reference/measure_fixtures.py M-44"
+   },
+   "caveat": "早期版本在 AGENTS.md 寫 11、在 docs/00 與 docs/02 寫 10，兩處互相矛盾。用數的，不是挑一個：11 是逐筆引用過**明細專屬欄位**的相異許可證數。這個數字描述的是本 repo 引用了多少張證，不是任何人應該對政府主機送出多少次請求——需要更多筆時請自己加節流。判準也修過一次：早期版本把 `validDate` 算進來，但 docs/06 拿 001081／001084 的「有效至」當鄰號證據，那兩張並不在這 11 張裡，依那個判準應該是 13——判準與清單對不起來。`validDate` 既然在清單資料裡就有，就不該當成明細 API 的識別特徵。檢查的方向要講清楚：測試驗證這 11 張每一張都真的出現在 docs/ 裡，但它**偵測不到**反方向——有人在 docs 裡新增第 12 張明細引用而忘了更新這份清單時，測試不會紅。那是這個檢查的已知盲區，不是它通過就代表清單完整。",
+   "cited_in": [
+    "AGENTS.md",
+    "docs/00-sources.md",
+    "docs/02-marker-restraint-07.md",
+    "docs/06-permit-identity-and-dates.md",
+    "reference/tfda_lic_query.py"
+   ]
+  },
+  {
+   "id": "M-45",
+   "claim": "2026-08-05 當天，許可證資料裡最新的發證日是 2026-07-16（全表）／2026-07-07（現行製劑・菌疫子集），也就是資料落後 20 至 29 天。",
+   "value": {
+    "whole_table": "2026-07-16",
+    "current_drug_subset": "2026-07-07",
+    "days_behind": [
+     20,
+     29
+    ]
+   },
+   "measured_at": "2026-08-05T14:38+08:00",
+   "population": "許可證全表與 M-06 的子集",
+   "method": "max(issue_date)，與量測日相減。",
+   "volatility": "moving",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT max(nullif(issue_date,'')) FROM <許可證表>;"
+   },
+   "caveat": "早期版本寫「將近三週」，那是 2026-08-04 的說法且偏低。落後天數每天都在動，這是量測當天的值，不是常數。",
+   "cited_in": [
+    "docs/04-moiety-first-appearance.md",
+    "docs/08-if-you-build-a-ledger.md"
+   ]
+  },
+  {
+   "id": "M-46",
+   "claim": "以七天為窗會經常得到零：2025-01 至 2026-06 的 78 個完整週裡，有 32 週（41%）沒有任何 moiety 首見旗標。",
+   "value": "41%",
+   "numerator": 32,
+   "denominator": 78,
+   "measured_at": "2026-08-05T14:39+08:00",
+   "population": "2025-01-06 至 2026-06-30 的 78 個週",
+   "method": "按發證日分週統計 is_new_moiety 為真的證數，計算計數為零的週數。",
+   "volatility": "moving",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FILTER (WHERE n=0), count(*) FROM (SELECT w, coalesce(c,0) n FROM generate_series('2025-01-06'::date,'2026-06-30',interval '7 day') w LEFT JOIN (SELECT date_trunc('week',issue_date) ww, count(*) c FROM <清單表> WHERE is_new_moiety GROUP BY 1) x ON x.ww=w) t;"
+   },
+   "caveat": "早期版本寫「搭配每月 15–34 張的節奏，一個七天的窗會在多數週得到零」。那個「每月 15–34 張」以任何一個想得到的分母都重現不出來（每月首見旗標中位數是 5、範圍 1–20；每月全部新發證中位數是 26、範圍 14–54），而且「多數週」也是誇大——實際是 41%。已刪除，改用這個直接量到的週零率。",
+   "cited_in": [
+    "docs/08-if-you-build-a-ledger.md"
+   ]
+  },
+  {
+   "id": "M-47",
+   "claim": "把「首見」旗標從成分原字串改鍵成正規化 moiety 之後，判定為首見的張數從 5,317 降到 1,467——舊鍵高估 3.6 倍。",
+   "value": "3.6×",
+   "numerator": 5317,
+   "denominator": 1467,
+   "measured_at": "2026-08-05T14:39+08:00",
+   "population": "M-06 的 19,705 張",
+   "method": "同一張表上兩個旗標欄位各自計數後相除。",
+   "volatility": "moving",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) FILTER (WHERE is_first_ingredient), count(*) FILTER (WHERE is_new_moiety) FROM <你的清單表>;"
+   },
+   "caveat": "早期版本寫「高估 3–5 倍」，那是一個沒有量過的區間。實際量出來是 3.6 倍。這個比值會隨清單重算而變動。",
+   "cited_in": [
+    "docs/04-moiety-first-appearance.md"
+   ]
+  },
+  {
+   "id": "M-48",
+   "claim": "子字串比對「監視」會誤判，這在真實資料上已經發生：截至 2026-08-05T14:47+08:00，已取回明細的證裡至少有 7 張帶 `24 監視期滿學名藥`。子字串作法會把這 7 張全部報成帶 `07`。",
+   "value": "≥ 7",
+   "measured_at": "2026-08-05T14:47+08:00",
+   "population": "截至該時刻已取回明細的許可證",
+   "method": "在已取回的 restraintItemsCode 陣列上，取每個元素第一個空白前的碼，計數等於 24 者。",
+   "volatility": "moving",
+   "source": "https://lmspiq.fda.gov.tw/api/public/sh/piq/1000/licSearch",
+   "reproduce": {
+    "kind": "private-data",
+    "note": "需要一批已取回的明細。這一項刻意寫成下界而不是比率：明細是逐筆慢速取回的，母體隨時在長，所以任何分母都會在你讀到它的時候過期。下界只會變大，不會失效。"
+   },
+   "caveat": "**不要把這個寫成比率。** 早期版本寫「已取回明細的 356 張現行證裡，24 出現在 5 張上」——那個分母是一次進行中的取回作業的中途快照，寫下的當下就已經不對了。量測期間它從 605 走到 623，`24` 的計數同時從 6 走到 7。存在性（這件事真的會發生）才是這裡要證明的東西，而存在性用下界表達最誠實。",
+   "cited_in": [
+    "docs/02-marker-restraint-07.md",
+    "fixtures/controls.json"
+   ]
+  },
+  {
+   "id": "M-49",
+   "claim": "有效期間終止日不能直接讀成「還在監視期內」：衛部菌疫輸字第001328號（2026 新證）發證 2026-06-25、終止 2031-06-25，正好五年；衛部藥輸字第026405號（2014 年核發）發證 2014-10-23、終止 2029-10-23，相隔 15 年，顯然已展延。",
+   "value": {
+    "衛部菌疫輸字第001328號": "5 年",
+    "衛部藥輸字第026405號": "15 年"
+   },
+   "n": 2,
+   "measured_at": "2026-08-05T14:46+08:00",
+   "population": "兩張許可證",
+   "method": "終止日減發證日。",
+   "volatility": "moves-with-upstream",
+   "source": "https://lmspiq.fda.gov.tw/api/public/sh/piq/1000/licSearch",
+   "reproduce": {
+    "kind": "public-source",
+    "command": "python3 reference/tfda_lic_query.py 60001328   # 以及 52026405"
+   },
+   "caveat": "n = 2。這兩筆說明「validDate 有時候不是那五年」，不提供任何展延比例。",
+   "cited_in": [
+    "docs/02-marker-restraint-07.md"
+   ]
+  },
+  {
+   "id": "M-50",
+   "claim": "衛部藥輸字第026405號（empagliflozin，2014-10-23 發證）在 2026-08-05 查詢時仍然帶 `07 新藥監視`。",
+   "value": true,
+   "n": 1,
+   "measured_at": "2026-08-05",
+   "population": "單張許可證",
+   "method": "明細 API 單筆查詢。",
+   "volatility": "moves-with-upstream",
+   "source": "https://lmspiq.fda.gov.tw/api/public/sh/piq/1000/licSearch",
+   "reproduce": {
+    "kind": "public-source",
+    "command": "python3 reference/tfda_lic_query.py 52026405"
+   },
+   "caveat": "這是一個時點觀察，不是一條規則。要主張「07 是永久戳記」需要追蹤同一張證在監視期前後的明細變化，本 repo 沒有做過這種縱向量測。它能支持的只有：07 至少不是現行監視狀態的即時反映。",
+   "cited_in": [
+    "docs/02-marker-restraint-07.md"
+   ]
+  },
+  {
+   "id": "M-51",
+   "claim": "docs/07 的驗證檢查表共 15 項（訊號一 5 項、訊號二 5 項、訊號三 5 項）。",
+   "value": 15,
+   "breakdown": {
+    "signal_1": 5,
+    "signal_2": 5,
+    "signal_3": 5
+   },
+   "measured_at": "2026-08-05",
+   "population": "docs/07-controls-and-pitfalls.md",
+   "method": "數 `- [ ]` 開頭的行。",
+   "volatility": "repo-internal",
+   "source": "docs/07-controls-and-pitfalls.md",
+   "reproduce": {
+    "kind": "repo-internal",
+    "command": "python3 reference/measure_fixtures.py M-51"
+   },
+   "caveat": "早期版本的引言寫 12，清單實際有 14。用數的，不是挑一個。這一項有測試釘住，改了清單而沒改引言會讓 make test 紅——訊號三加入「成分欄是現況值」那一項時，它就是這樣把還寫著 14 的引言擋下來的。",
+   "cited_in": [
+    "docs/07-controls-and-pitfalls.md"
+   ]
+  },
+  {
+   "id": "M-52",
+   "claim": "六張被更正的證，每一張的**來源日期都早於現行清單裡同 moiety 的所有其他證**，而更正後的日期都不是最早。6 / 6。一個壞掉的發證日確實會把該 moiety 的首見位置搬到自己身上。",
+   "value": "6 / 6",
+   "numerator": 6,
+   "denominator": 6,
+   "measured_at": "2026-08-05T14:52+08:00",
+   "population": "M-42 的 6 張有更正值的證",
+   "method": "逐張比較（來源日、更正日）與「現行清單裡同 moiety 其他證的最早發證日」三者的順序。",
+   "volatility": "moving",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT c.permit_number, c.original_value, c.corrected_value, (SELECT min(x.issue_date) FROM <清單表> x WHERE x.moieties && l.moieties AND x.permit_number <> l.permit_number) FROM <更正對照表> c JOIN <清單表> l USING (permit_number);"
+   },
+   "caveat": "**範圍要講死**：這是相對於**現行清單**的排序，不是相對於首見旗標真正的基線（含已註銷證的全表）。所以它證明的是「來源日期會讓這張證排到同 moiety 的最前面」，不是「它一定竊走了旗標」——一張更早的已註銷證仍然可能擋在前面。這一項存在的理由是取代早期版本那句「量測過，刻意不修、傷害為零」：傷害不是零，位移是可以直接量到的，只是這一次落在幾十年前的老藥上。",
+   "cited_in": [
+    "docs/06-permit-identity-and-dates.md"
+   ]
+  },
+  {
+   "id": "M-53",
+   "claim": "衛署菌疫輸字第000939號（2013 發證）與 衛部菌疫輸字第001230號（2023 發證）兩張流感疫苗證，正規化後的 moiety 集合有 3 個相同，各有 1 個獨有——不是同一個集合。",
+   "value": "3 / 4",
+   "breakdown": {
+    "shared": 3,
+    "only_2013": 1,
+    "only_2023": 1
+   },
+   "measured_at": "2026-08-05",
+   "population": "fixtures/ingredients.sample.jsonl 裡的兩列流感疫苗成分欄",
+   "method": "對兩列成分欄各跑 reference/tw_moiety.py 的 moieties()，取交集與差集大小。",
+   "volatility": "static-fixture",
+   "source": "fixtures/ingredients.sample.jsonl（成分欄逐字取自 2026-08-05 的許可證資料）",
+   "reproduce": {
+    "kind": "fixture",
+    "command": "python3 reference/measure_fixtures.py M-53"
+   },
+   "caveat": "這一項存在的理由是**推翻本 repo 自己寫過的一句話**。docs/05 早期版本把第 3 筆的原因寫成「年度換株，正規化後與 2013 年那張相同」；用隨附的正規化器跑一次就會看到 `B/PHUKET/3073/2013-LIKE VIRUS` 與 `B/PHUKET/3073/2013 - LIKE STRAIN` 並沒有合併。真正的機制是成分欄被改版（M-54），不是字串合併。一句可以被隨附程式當場證偽的解釋，比沒有解釋更貴。",
+   "cited_in": [
+    "docs/04-moiety-first-appearance.md",
+    "docs/05-crosswalk.md",
+    "fixtures/README.md",
+    "fixtures/ingredients.sample.jsonl"
+   ]
+  },
+  {
+   "id": "M-54",
+   "claim": "許可證的成分欄是現況欄位、會隨變更登記改寫：帶 2022 年流感病毒株的現行證共 12 張，其中 4 張的發證日早於 2020 年，最早一張發證於 2010-09-20。",
+   "value": "4 / 12",
+   "numerator": 4,
+   "denominator": 12,
+   "earliest_issue_date": "2010-09-20",
+   "measured_at": "2026-08-05T18:20+08:00",
+   "population": "現行（未註銷）許可證中，成分欄含 2022 年當季病毒株字樣者",
+   "method": "以成分欄含 'Victoria/4897/2022' 為條件取現行證，再數發證年 < 2020 者。",
+   "volatility": "moving",
+   "source": "食藥署許可證資料",
+   "reproduce": {
+    "kind": "private-data",
+    "sql": "SELECT count(*) AS all_current, count(*) FILTER (WHERE extract(year FROM issue_date) < 2020) AS pre_2020, min(issue_date) FROM <你的許可證表> WHERE active_ingredient ILIKE '%Victoria/4897/2022%' AND <現行條件>;"
+   },
+   "caveat": "**這是機制的證據，不是機制的比例。** 它證明「發證日很早的證，成分欄可以裝著十幾年後才出現的成分」確實發生，而且不只一張。它**沒有**量測母體層級的成分欄變更率——那需要把變更日期欄與發證日在全表上比對，本 repo 沒有做。用一個病毒株字串當條件也只抓得到流感疫苗這一族，其他治療領域的改版不會出現在這個數字裡。",
+   "cited_in": [
+    "docs/04-moiety-first-appearance.md",
+    "docs/05-crosswalk.md",
+    "docs/07-controls-and-pitfalls.md"
+   ]
+  }
+ ],
+ "deleted": [
+  {
+   "was": "臺灣每年約 30–50 個新分子",
+   "where": "docs/04",
+   "action": "刪除",
+   "why": "完全沒有來源。而且就算補得到來源也不該放在那個位置：那句話被寫成「完整年度落在 31–50，與台灣每年約 30–50 個新分子的量級相符」，用一個外部量級去佐證一個從同一份資料讀出來的帶，是循環論證。現在 M-34 明講那個帶是內部一致性檢查。"
+  },
+  {
+   "was": "每月 15–34 張",
+   "where": "docs/08",
+   "action": "刪除，改用 M-46",
+   "why": "任何想得到的分母都重現不出這個區間（每月首見旗標 1–20、中位 5；每月全部新發證 14–54、中位 26）。形狀最接近的是逐年公告則數 15–32（M-16）——一個把「每年」讀成「每月」的錯位。它支撐的結論「多數週得到零」也是誇大，實際 41%。"
+  },
+  {
+   "was": "1,639 天（docs/05 第 6 筆的「相隔」欄）",
+   "where": "docs/05",
+   "action": "刪除該欄的值",
+   "why": "它是 001082 的換發日 2025-01-14 減 001133 的 2020-07-20。001082 的 oriIssueDate 是 2018-05-10，比 001133 早，所以這個差距不是一個真實的間隔，是日期欄位選錯的產物。見 M-21、M-39。"
+  },
+  {
+   "was": "1,472（旗標總數）與 1,216（未確認數）",
+   "where": "docs/05",
+   "action": "以 M-37（1,467）與 M-38（1,218）取代",
+   "why": "兩件事。1,472 是套用日期更正之前的值，已隨清單重算而變。1,216 則是算式錯了：1,472 − 256 減掉的是「已公告且在現行清單」的張數，但其中 7 張並沒有被旗標，該減的是 249。1,218 現在是直接查出來的，不是相減出來的。"
+  },
+  {
+   "was": "已取回明細的 356 張現行證裡，24 出現在 5 張上",
+   "where": "docs/02",
+   "action": "改寫成 M-48 的下界形式",
+   "why": "分母是一次進行中的取回作業的中途快照——量測期間它從 605 走到 623。比率寫下的當下就過期了；要證明的其實是存在性，而存在性用下界表達不會失效。"
+  },
+  {
+   "was": "3–5 倍",
+   "where": "docs/08（原文），現由 docs/04 承接",
+   "action": "以 M-47（3.6 倍）取代；該數字隨後移到 docs/04，因為它講的是正規化這個動作本身",
+   "why": "那是一個沒有量過的區間。同一張表上兩個欄位各數一次就有確切值。"
+  },
+  {
+   "was": "4,037 / 66,267（序號倒置）",
+   "where": "docs/06",
+   "action": "以 M-43 重新量測的 4,066 / 66,413 取代",
+   "why": "原本的分子分母無法以任何寫得出來的查詢重現。百分比同樣是 6.1%，但一個寫得出查詢的 6.1% 和一個寫不出來的 6.1% 不是同一種東西。"
+  },
+  {
+   "was": "10 筆（明細 API 節流示範）",
+   "where": "docs/00、docs/02、reference/tfda_lic_query.py",
+   "action": "統一為 M-44 的 11",
+   "why": "AGENTS.md 寫 11、docs 寫 10。數過：本 repo 逐筆引用明細 API 結果的相異許可證是 11 張。用數的，不是挑一個。"
+  },
+  {
+   "was": "12 項（docs/07 檢查表）",
+   "where": "docs/07",
+   "action": "改為 M-51 的 14",
+   "why": "清單實際有 14 項。同樣是用數的，而且現在有測試釘住。"
+  },
+  {
+   "was": "四個 2026 年的新分子，全部沒有 ATC",
+   "where": "docs/04、README、docs/00、docs/05",
+   "action": "四個分子保留為例子，論證改用 M-33",
+   "why": "那句話對它點名的四個分子成立，但「四個」讀起來像母體就是四個——2026 年被旗標的其實有 33 張證。舉例可以只舉四個，論證要用 29 / 33 對 345 / 19,705 這個對比，而且它比原本的說法強得多。"
+  },
+  {
+   "was": "「嚴重高估：19 個月產出 156 筆」裡的 19 與 156",
+   "where": "docs/04",
+   "action": "刪除兩個數字，其後整段自我更正也刪除",
+   "why": "兩個都重現不出來——它們屬於一個已被撤回的說法，而且分子取的期間比實際橫跨的期間短了將近一半，所以「高估」本身就是從算錯的區間長出來的。更糟的是那個 156 剛好與同一頁「無法分類 156 筆」（M-31）同值，兩個不相干的量會被讀成同一個。數字刪掉之後，剩下的那一段只是在敘述本專案自己改過什麼，對讀者判讀許可證資料沒有幫助，一併刪除；同一個教訓已由 M-47 以實測值表達。"
+  },
+  {
+   "was": "make test  # 51 passed",
+   "where": "README",
+   "action": "刪除數字，只留指令",
+   "why": "測試數每次加測試都會變，是一個保證會過期的數字。讀者跑一次就看得到當下的值；印在 README 上只會變成下一個要維護的謊。AGENTS.md 的狀態表留著帶日期的計數，那是一筆有日期的紀錄，不是對現況的宣稱。"
+  },
+  {
+   "was": "98%（ATC 覆蓋率）",
+   "where": "docs/04",
+   "action": "改為 M-32 的 98.2%，並附分子分母",
+   "why": "19,360 / 19,705 = 98.25%。原本的 98% 沒有錯，但既然分子分母都在手上，就沒有理由只給一個約數。"
+  }
+ ]
+}

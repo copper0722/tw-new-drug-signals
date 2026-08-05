@@ -1,0 +1,49 @@
+// 新成分新藥核准審查報告摘要的公告標題樣本。
+// real = 逐字取自 2026-08-05 的 206 則真實公告；synthetic = 本 repo 自製的負控輸入。
+// 這是測試樣本，不是資料鏡像。重抓見 docs/03。
+{"title": "台灣禮來股份有限公司  衛部藥輸字第027640-027643號「捷癌寧膜衣錠」", "expected": ["衛部藥輸字第027640號", "衛部藥輸字第027641號", "衛部藥輸字第027642號", "衛部藥輸字第027643號"], "why": "完整範圍，連字號", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣拜耳股份有限公司 衛部藥輸字第027746-027748號 維泰凱膠囊25毫克、維泰凱膠囊100毫克及維泰凱20毫克/毫升口服溶液", "expected": ["衛部藥輸字第027746號", "衛部藥輸字第027747號", "衛部藥輸字第027748號"], "why": "完整範圍，連字號", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣諾和諾德藥品股份有限公司 衛部菌疫輸字第001160-64號 「諾和長效第八因子注射劑 500、1000、1500、2000、3000 IU」", "expected": ["衛部菌疫輸字第001160號", "衛部菌疫輸字第001161號", "衛部菌疫輸字第001162號", "衛部菌疫輸字第001163號", "衛部菌疫輸字第001164號"], "why": "短尾範圍（尾巴只給末兩碼）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "輝凌藥品股份有限公司 衛部菌疫輸字第001187-89號「樂可孕注射筆12微克/0.36毫升、36微克/1.08毫升、72微克/2.16毫升」", "expected": ["衛部菌疫輸字第001187號", "衛部菌疫輸字第001188號", "衛部菌疫輸字第001189號"], "why": "短尾範圍（尾巴只給末兩碼）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣安斯泰來製藥股份有限公司 衛部菌疫輸字第001212-13號「備思復凍晶注射劑20、30毫克」", "expected": ["衛部菌疫輸字第001212號", "衛部菌疫輸字第001213號"], "why": "短尾範圍（尾巴只給末兩碼）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "賽諾菲股份有限公司 衛部菌疫輸字第001234-37號「奧妥凝凍晶注射劑250、500、1000、2000國際單位」", "expected": ["衛部菌疫輸字第001234號", "衛部菌疫輸字第001235號", "衛部菌疫輸字第001236號", "衛部菌疫輸字第001237號"], "why": "短尾範圍（尾巴只給末兩碼）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣優時比貿易有限公司 衛部藥輸字第027714~027719號 「必治癲膜衣錠、注射液、口服溶液」", "expected": ["衛部藥輸字第027714號", "衛部藥輸字第027715號", "衛部藥輸字第027716號", "衛部藥輸字第027717號", "衛部藥輸字第027718號", "衛部藥輸字第027719號"], "why": "波浪號範圍", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "美商惠氏藥廠（亞洲）股份有限公司台灣分公司 衛部菌疫輸字第001196、97號「能增樂預填充注射筆24、60毫克」", "expected": ["衛部菌疫輸字第001196號", "衛部菌疫輸字第001197號"], "why": "短尾列舉（、）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣拜耳股份有限公司 衛部藥輸字第028325、26號 「可申達10、20毫克膜衣錠」", "expected": ["衛部藥輸字第028325號", "衛部藥輸字第028326號"], "why": "短尾列舉（、）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "香港商吉立亞醫藥有限公司台灣分公司 衛部藥輸字第028208、028209號「吉炎可膜衣錠100、200毫克」", "expected": ["衛部藥輸字第028208號", "衛部藥輸字第028209號"], "why": "完整列舉（、）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "友華生技醫藥股份有限公司 衛部藥輸字第028351、028352號「博癌癒50、75毫克」", "expected": ["衛部藥輸字第028351號", "衛部藥輸字第028352號"], "why": "完整列舉（、）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "羅氏大藥廠股份有限公司 衛部藥輸字第 027864/027865號 「羅思克 100 毫克 / 200 毫克膠囊」", "expected": ["衛部藥輸字第027864號", "衛部藥輸字第027865號"], "why": "斜線列舉，且「第」後有空白", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣默克股份有限公司 衛部菌疫輸字第001085號「百穩益注射劑20毫克/毫升 」", "expected": ["衛部菌疫輸字第001085號"], "why": "產品名裡有斜線（20毫克/毫升），但它在「號」之後，不能被當成序號分隔符", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣諾華股份有限公司 衛部菌疫輸字第001127/001128號 「安莫疼注射液劑70毫克/毫升 /140毫克/毫升 」", "expected": ["衛部菌疫輸字第001127號", "衛部菌疫輸字第001128號"], "why": "斜線列舉，且「第」後有空白", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "運和生技有限公司 衛部藥輸字第028106「期樂錠 50毫克 」", "expected": ["衛部藥輸字第028106號"], "why": "標題完全沒有「號」", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "羅氏大藥廠股份有限公司「癌妥飛 3毫克膜衣錠、9毫克膜衣錠」(衛部藥輸字第028944-45)", "expected": ["衛部藥輸字第028944號", "衛部藥輸字第028945號"], "why": "標題完全沒有「號」", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "科進製藥科技股份有限公司「脂妙清軟膠囊1000毫克」(衛部藥製字第059019 號)", "expected": ["衛部藥製字第059019號"], "why": "「號」前有空白", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣諾華股份有限公司 衛部藥輸字第R00104號「鎦癌平注射液370百萬貝克/毫升」", "expected": ["衛部藥輸字第R00104號"], "why": "序號以字母開頭（放射性藥品）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "行政院原子能委員會核能研究所核醫製藥中心之「核研[氟-18]氟化鈉注射劑（衛署藥製字第R00032號）", "expected": ["衛署藥製字第R00032號"], "why": "序號以字母開頭，且產品名裡有連字號（[氟-18]）與全形括號", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣諾華股份有限公司「樂鎵美25微克放射性顯影劑製備試劑組」(衛部藥輸字第R00108號)", "expected": ["衛部藥輸字第R00108號"], "why": "序號以字母開頭（放射性藥品）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "恩典科研股份有限公司衛部藥輸字第R00105號「鎵連坊鍺68/鎵68孳生器」", "expected": ["衛部藥輸字第R00105號"], "why": "序號以字母開頭（放射性藥品）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "高端疫苗生物製劑股份有限公司衛部菌疫製字第000152號「\"高端\"腸病毒71型疫苗」", "expected": ["衛部菌疫製字第000152號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣中外製藥股份有限公司衛部菌疫輸字第001087號 HEMLIBRA SC Injection 150 mg/mL", "expected": ["衛部菌疫輸字第001087號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "臺灣阿斯特捷利康股份有限公司衛部菌疫輸字第001088號抑癌寧注射劑(IMFINZI Injection 50 mg/ml)", "expected": ["衛部菌疫輸字第001088號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣武田藥品工業股份有限公司衛部菌疫輸字第001145號「利腸服5毫克注射劑」", "expected": ["衛部菌疫輸字第001145號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "嬌生股份有限公司衛部菌疫輸字第001177號「肺倍恩注射劑50毫克/毫升」", "expected": ["衛部菌疫輸字第001177號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "禾利行股份有限公司衛部菌疫輸字第001206號「拓達維注射劑」", "expected": ["衛部菌疫輸字第001206號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣諾和諾德藥品股份有限公司衛部菌疫輸字第001229號「諾和高 注射劑10毫克/1.5毫升」", "expected": ["衛部菌疫輸字第001229號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣東洋藥品工業股份有限公司衛部菌疫輸字第001230號「福流佐四價流感疫苗」", "expected": ["衛部菌疫輸字第001230號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "臺灣阿斯特捷利康股份有限公司衛部菌疫輸字第001231號「莎芙諾注射劑 150毫克/毫升」", "expected": ["衛部菌疫輸字第001231號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "法商益普生股份有限公司台灣分公司衛部藥輸字第027513號「癌必定膜衣錠 60毫克」", "expected": ["衛部藥輸字第027513號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣武田藥品工業股份有限公司衛部藥輸字第027623號「福星定膜衣錠20毫克(Vocinti Film-Coated Tablets 20mg)」", "expected": ["衛部藥輸字第027623號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣塩野義製藥股份有限公司衛部藥輸字第027693號「紓伏效膜衣錠20毫克(Xofluza Tablets 20mg)」", "expected": ["衛部藥輸字第027693號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣安斯泰來製藥股份有限公司衛部藥輸字第027890號「適加坦膜衣錠40毫克」", "expected": ["衛部藥輸字第027890號"], "why": "公司名直接接上字別（貪婪中文字元類會吞掉它）", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣諾華股份有限公司 衛部罕菌疫輸字第000044號「樂適達注射劑」、衛部菌疫輸字第001209號「\"諾華\"樂喜達注射劑」", "expected": ["衛部罕菌疫輸字第000044號", "衛部菌疫輸字第001209號"], "why": "同一則公告帶兩個不同字別的完整許可證號", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣武田藥品工業股份有限公司 衛部藥字第027731號「癌能畢 膜衣錠90毫克」", "expected": [], "why": "來源錯字：衛部藥字不在 61 筆碼表內。解析器必須回報無法解析，**不可**猜成衛部藥輸——猜這次剛好會對，但那是運氣不是方法。正解是拿序號到許可證表反查。", "origin": "real", "observed": "2026-08-05", "expect_unresolved": true, "resolves_to_by_lookup": "衛部藥輸字第027731號"}
+{"title": "夏爾生技醫藥股份有限公司  衛部藥輸字第027666號「璨睛點眼液5%」", "expected": ["衛部藥輸字第027666號"], "why": "單一許可證，無異常", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "瑞士商艾伯維藥品有限公司台灣分公司 「唯可來膜衣錠 10毫克 」(衛部藥輸字第027357號)", "expected": ["衛部藥輸字第027357號"], "why": "許可證號寫在括號裡、排在產品名之後", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣禮來股份有限公司「樂除瘤注射劑 」(衛部菌疫輸字第001075號 )", "expected": ["衛部菌疫輸字第001075號"], "why": "許可證號寫在括號裡、排在產品名之後", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "嬌生股份有限公司「特諾雅注射液 」(衛部菌疫輸字第001077號)", "expected": ["衛部菌疫輸字第001077號"], "why": "許可證號寫在括號裡、排在產品名之後", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "台灣諾華股份有限公司 衛部罕菌疫輸字第000029號「諾健生靜脈懸液注射劑 」", "expected": ["衛部罕菌疫輸字第000029號"], "why": "單一許可證，無異常", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "安特羅生物科技股份有限公司 衛部菌疫製字第000149號「安拓伏腸病毒71型疫苗」", "expected": ["衛部菌疫製字第000149號"], "why": "單一許可證，無異常", "origin": "real", "observed": "2026-08-05", "expect_unresolved": false}
+{"title": "某某股份有限公司 衛部藥輸字第0271234號「測試錠」", "expected": [], "why": "合成負控：序號 7 位。lpad 會截斷成 6 位並指向別張證，必須拒絕。", "origin": "synthetic", "observed": null, "expect_unresolved": true}
+{"title": "某某股份有限公司 衛部藥輸字第R00100-R00104號「測試針劑」", "expected": [], "why": "合成負控：字母序號的範圍。遞增規則未經量測，拒絕展開而非猜。", "origin": "synthetic", "observed": null, "expect_unresolved": true}
+{"title": "某某股份有限公司 衛部藥輸字第027640-027900號「測試錠」", "expected": [], "why": "合成負控：範圍超過 50 張，視為解析錯誤而非真的一次核發 261 張。", "origin": "synthetic", "observed": null, "expect_unresolved": true}
+{"title": "某某股份有限公司 衛部藥輸字第 027864 Testdrug 100mg 「測試錠」", "expected": ["衛部藥輸字第027864號"], "why": "合成負控：序號後直接接英文品名。**在 206 則真實標題裡出現 0 次**（`第\\s*[0-9]{6}\\s*[A-Za-z]` 匹配 0/206），這是預防性守衛，不是觀察到的形態。", "origin": "synthetic", "observed": null, "expect_unresolved": false}

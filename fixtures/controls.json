@@ -1,0 +1,78 @@
+{
+ "_meta": {
+  "purpose": "三個模組共用的具名對照組。每個工具都需要**兩個**控制：一個必須亮的正控，一個必須不亮的負控。只有正控的工具，對「抓太多」完全沒有偵測能力——一個把所有東西都判成 true 的比對器，正控會完美通過。",
+  "negative_control_rule": "負控要取自**最容易被誤判為正**的那一族，不是隨便一個明顯不相干的樣本。所以這裡的負控是：名稱同樣含「監視」的其他限制項目碼、同一分子的水合物寫法、以及一張前身已註銷的證。它們是各該比對器的負控，不是對該藥品法規身分的判斷。",
+  "observed": "2026-08-05"
+ },
+ "restraint_07": {
+  "positive": {
+   "lic_id": "60001328",
+   "permit_number": "衛部菌疫輸字第001328號",
+   "ingredient": "IBALIZUMAB",
+   "restraintItemsCode": [
+    "02 輸 入",
+    "07 新藥監視",
+    "5E 已執行國內臨床試驗",
+    "5F 免除銜接性試驗",
+    "67 成品已完成元素不純物評估(Option 1、2a、2b)"
+   ],
+   "expect": "designated = true, matched_code = '07'"
+  },
+  "negative": {
+   "lic_id": "01033862",
+   "permit_number": "衛署藥製字第033862號",
+   "ingredient": "METRONIDAZOLE（學名藥）",
+   "restraintItemsCode": [
+    "01 國 產"
+   ],
+   "expect": "designated = false",
+   "why": "這張證同時是 restraint 的負控與日期陷阱的示例。**帶著來源發證日**（不可能的 1911-03-23）它會排到自己那個 moiety 的最前面，被首見法則誤判為新；套上另存的更正值 1991-03-23 之後就不會（M-52）。用現在式寫成「它會被誤判」是舊的說法，與 docs/06 的更正對照表矛盾。"
+  },
+  "negative_substring_trap": {
+   "restraintItemsCode": [
+    "25 監視中學名藥",
+    "24 監視期滿學名藥",
+    "26 監視期滿新藥"
+   ],
+   "expect": "designated = false",
+   "why": "用子字串「監視」比對，這三個都會判成 true。24 在真實資料裡確實出現（M-48：截至 2026-08-05T14:47+08:00，已取回明細的證裡至少 7 張帶 24），所以這不是假想的陷阱。寫成下界而不是比率是刻意的——明細是逐筆慢速取回的，分母隨時在長，一個分母還在動的比率寫下的當下就過期了。這裡測的是比對器有沒有退化成子字串比對，不是這三個碼底下的藥有沒有新藥身分——26 的名稱就叫「監視期滿新藥」。"
+  }
+ },
+ "moiety_first_appearance": {
+  "positive": {
+   "active_ingredient": "DASATINIB",
+   "permit_number": "衛署藥輸字第024794號",
+   "issue_date": "2008-03-03",
+   "expect": "首見"
+  },
+  "negative": {
+   "active_ingredient": "DASATINIB MONOHYDRATE",
+   "permit_number": "衛部藥輸字第029172號",
+   "issue_date": "2026-05-29",
+   "expect": "非首見，應對回 2008-03-03 那筆"
+  },
+  "baseline_trap": {
+   "active_ingredient": "Remdesivir",
+   "permit_number": "衛部藥輸字第027899號",
+   "issue_date": "2023-06-07",
+   "expect": "非首見",
+   "why": "同分子的 衛部藥輸字第027898號 發證於 2020-06-02 但**已註銷**。基線若只涵蓋現行證，這張會被判成首見。基線必須含已註銷證。"
+  }
+ },
+ "permit_id": {
+  "positive": {
+   "permit_number": "衛部藥輸字第027899號",
+   "lic_id": "52027899"
+  },
+  "negative_letter_serial": {
+   "permit_number": "衛部藥輸字第R00108號",
+   "lic_id": "52R00108",
+   "why": "R 序號已是 6 字元。補成 7 字元的 R000108 之後，licId 會是 9 字元的 52R000108，而正常的 licId 是 8 字元。"
+  },
+  "negative_overlong": {
+   "serial": "0271234",
+   "expect": "PermitIdError",
+   "why": "lpad 會截斷成 027123，指向另一張真實存在的許可證"
+  }
+ }
+}

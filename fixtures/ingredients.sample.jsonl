@@ -1,0 +1,29 @@
+// 許可證成分欄樣本 -> 期望的 moiety 集合。
+// real = 逐字取自 2026-08-05 的許可證資料；synthetic = 本 repo 自製的負控輸入。
+// 這是測試樣本，不是資料鏡像。25 列 = 24 real + 1 synthetic（measurements.json M-30）。
+// 這裡的 why 欄只描述這一列；任何母體規模的數字一律引用 M-NN，不裸寫。
+{"active_ingredient": "IBALIZUMAB", "expected_moieties": ["IBALIZUMAB"], "why": "乾淨的單一成分（已知正控之一）", "origin": "real"}
+{"active_ingredient": "BELZUTIFAN", "expected_moieties": ["BELZUTIFAN"], "why": "乾淨的單一成分（已知正控之一）", "origin": "real"}
+{"active_ingredient": "SEVABERTINIB", "expected_moieties": ["SEVABERTINIB"], "why": "乾淨的單一成分（已知正控之一）", "origin": "real"}
+{"active_ingredient": "ATRASENTAN HYDROCHLORIDE", "expected_moieties": ["ATRASENTAN"], "why": "鹽別後綴（已知正控之一）", "origin": "real"}
+{"active_ingredient": "DASATINIB", "expected_moieties": ["DASATINIB"], "why": "2008 年的首見證，是下面那筆的對照", "origin": "real"}
+{"active_ingredient": "DASATINIB MONOHYDRATE", "expected_moieties": ["DASATINIB"], "why": "**關鍵負控**：水合物後綴造出一個新字串。剝除後應對回 2008 年的 DASATINIB。", "origin": "real"}
+{"active_ingredient": "CEVIMELINE HYDROCHLORIDE", "expected_moieties": ["CEVIMELINE"], "why": "2013 年的首見證", "origin": "real"}
+{"active_ingredient": "CEVIMELINE HYDROCHLORIDE;;CAPSULE SHELL", "expected_moieties": ["CEVIMELINE"], "why": "賦形劑混進成分欄；丟棄 CAPSULE SHELL 後應對回 2013 年那筆", "origin": "real"}
+{"active_ingredient": "NETARSUDIL MESYLATE;;LATANOPROST", "expected_moieties": ["LATANOPROST", "NETARSUDIL"], "why": "複方：netarsudil 是新的，latanoprost 不是。首見判定必須逐一 moiety 看。", "origin": "real"}
+{"active_ingredient": "EZETIMIBE;;Bempedoic Acid", "expected_moieties": ["BEMPEDOIC ACID", "EZETIMIBE"], "why": "Nustendi（衛部藥輸字第029062號）。兩個成分都不新，但這張證帶 07 新藥監視。", "origin": "real"}
+{"active_ingredient": "Bempedoic Acid", "expected_moieties": ["BEMPEDOIC ACID"], "why": "2024 年的首見證，是上面那筆的對照", "origin": "real"}
+{"active_ingredient": "ACETAMINOPHEN (EQ TO PARACETAMOL)", "expected_moieties": ["ACETAMINOPHEN"], "why": "括號內是換算說明，不是成分", "origin": "real"}
+{"active_ingredient": "20% CHLORHEXIDINE GLUCONATE SOLUTION (eq to CHLORHEXIDINE GLUCONATE 20%)", "expected_moieties": ["CHLORHEXIDINE"], "why": "濃度前綴 + 劑型字 + 括號換算，三種噪音疊在一起", "origin": "real"}
+{"active_ingredient": "GENTAMICIN (AS SULFATE);;BETAMETHASONE VALERATE", "expected_moieties": ["BETAMETHASONE", "GENTAMICIN"], "why": "(AS SULFATE) 括號 + VALERATE 酯後綴", "origin": "real"}
+{"active_ingredient": "OPADRY PINK;;RIVAROXABAN", "expected_moieties": ["RIVAROXABAN"], "why": "**已量測的偽陽性來源**：包衣劑被列在成分欄。未收錄進賦形劑清單時，OPADRY PINK 會變成一個「新 moiety」。", "origin": "real"}
+{"active_ingredient": "RIVAROXABAN;;OPADRY BROWN", "expected_moieties": ["RIVAROXABAN"], "why": "同上，另一個顏色的變體", "origin": "real"}
+{"active_ingredient": "Nintedanib esylate", "expected_moieties": ["NINTEDANIB"], "why": "**已量測的偽陽性來源**：與下一筆是同一個鹽的兩種寫法", "origin": "real"}
+{"active_ingredient": "Nintedanib ethanesulfonate", "expected_moieties": ["NINTEDANIB"], "why": "esylate 與 ethanesulfonate 同物；兩者都要收進鹽別清單才會合併", "origin": "real"}
+{"active_ingredient": "SODIUM BICARBONATE", "expected_moieties": ["SODIUM BICARBONATE"], "why": "負控：SODIUM 在字首不是鹽別後綴，不可剝", "origin": "real"}
+{"active_ingredient": "CAPSULE SHELL", "expected_moieties": [], "why": "只有賦形劑 -> 成分資料缺漏，必須現形而不是消失", "origin": "real"}
+{"active_ingredient": "", "expected_moieties": [], "why": "成分欄為空 -> 成分資料缺漏。母體規模見 measurements.json 的 M-31（2026-08-05：空成分欄 140 張，加上正規化後不剩 moiety 的 16 張，合計 156 張）。", "origin": "real"}
+{"active_ingredient": "POTASSIUM PHOSPHATE", "expected_moieties": ["POTASSIUM PHOSPHATE"], "why": "負控：剝掉 PHOSPHATE 只會剩下反離子 POTASSIUM，代表剝過頭，保留原字串", "origin": "real"}
+{"active_ingredient": "B/Austria/1359417/2021 - like strain (B/Austria/1359417/2021, BVR-26);;A/Victoria/4897/2022 (H1N1)pdm09-like strain (A/Victoria/4897/2022, IVR-238);;A/Thailand/8/2022 (H3N2) - like virus (A/Thailand/8/2022, IVR-237);;B/Phuket/3073/2013 - like strain (B/Phuket/3073/2013, wild type)", "expected_moieties": ["A/THAILAND/8/2022 - LIKE VIRUS", "A/VICTORIA/4897/2022 PDM09-LIKE STRAIN", "B/AUSTRIA/1359417/2021 - LIKE STRAIN", "B/PHUKET/3073/2013 - LIKE STRAIN"], "why": "衛署菌疫輸字第000939號（發證 2013-04-24）**現在的**成分欄。它裝的是 2022／2023 年的當季病毒株——成分欄是現況欄位，不是核發當時的快照。與下一筆合看，見 docs/05 第 3 筆。", "origin": "real"}
+{"active_ingredient": "A/Thailand/8/2022 (H3N2) - like virus (A/Thailand/8/2022, IVR-237);;A/Victoria/4897/2022 (H1N1)pdm09-like strain (A/Victoria/4897/2022, IVR-238);;B/Austria/1359417/2021 - like strain (B/Austria/1359417/2021, BVR-26);;B/Phuket/3073/2013-like virus (B/Phuket/3073/2013, BVR-1B)", "expected_moieties": ["A/THAILAND/8/2022 - LIKE VIRUS", "A/VICTORIA/4897/2022 PDM09-LIKE STRAIN", "B/AUSTRIA/1359417/2021 - LIKE STRAIN", "B/PHUKET/3073/2013-LIKE VIRUS"], "why": "衛部菌疫輸字第001230號（發證 2023-03-03）。與上一筆**不是**同一個 moiety 集合：`B/PHUKET…-LIKE VIRUS` 對 `B/PHUKET… - LIKE STRAIN`，正規化沒有合併它們（M-53）。docs/05 早期版本寫成「正規化後與 2013 年那張相同」，這兩列就是它的反例。", "origin": "real"}
+{"active_ingredient": "TESTOSTERONE UNDECANOATE-X", "expected_moieties": ["TESTOSTERONE UNDECANOATE-X"], "why": "合成負控：UNDECANOATE-X 不在封閉清單裡，所以不會被剝——這正是本方法的結構性極限，清單沒收錄的寫法會安靜地變成新 moiety。", "origin": "synthetic"}

@@ -1,0 +1,22 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 Wang Chieh-Li (王介立)
+
+The prose in `docs/`, `README.md`, `CONTRIBUTING.md` and `fixtures/README.md`
+is licensed under the Creative Commons Attribution 4.0 International License.
+
+You are free to share and adapt this material for any purpose, including
+commercially, provided you give appropriate credit, provide a link to the
+license, and indicate if changes were made.
+
+Full licence text: https://creativecommons.org/licenses/by/4.0/legalcode
+Human-readable summary: https://creativecommons.org/licenses/by/4.0/
+
+Source code in `reference/` is licensed separately under the MIT License; see
+LICENSE.
+
+The Taiwanese statutory texts quoted in `docs/` are government works reproduced
+for reference; authoritative versions are published at https://law.moj.gov.tw/.
+Data samples in `fixtures/` are small excerpts of public TFDA publications,
+retained for testing and attributed with their retrieval date; they are not a
+mirror and are not licensed by this repository.
